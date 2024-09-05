@@ -13,9 +13,11 @@ let resetButton = document.getElementById("reset-button");
 let changeButton = document.getElementById("change-button");
 // Result Section
 let resultSection = document.querySelector(".result-section");
-let resultTitle = null;
-let result1Element = null;
-let result2Element = null;
+let resultTitle = document.createElement("h2");
+let result1Element = document.createElement("h3");
+let result2Element = document.createElement("h3");
+let clearButton = document.createElement("button");
+clearButton.innerHTML = "Clear";
 // Flags ( Starting type )
 let isCelsius = true;
 let isFahrenheit = false;
@@ -38,12 +40,8 @@ function changeContent(isC, isF, isK) {
     }
 }
 function setResultSection(c, f, k, mainValue) {
-    resultSection.innerHTML = "";
-    resultTitle = document.createElement("h2");
-    resultTitle.innerHTML = "Results";
-    resultSection.append(resultTitle);
-    result1Element = document.createElement("h3");
-    result2Element = document.createElement("h3");
+    clearResults();
+    // Results text
     result1Element.classList.add("result-text");
     result2Element.classList.add("result-text");
     if (isCelsius) {
@@ -58,8 +56,21 @@ function setResultSection(c, f, k, mainValue) {
         result1Element.innerHTML = `${mainValue} K = ${c} °C`;
         result2Element.innerHTML = `${mainValue} K = ${f} °F`;
     }
+    // Appending to DOM
     resultSection.append(result1Element);
     resultSection.append(result2Element);
+    // Clear Button
+    clearButton.addEventListener("click", function () {
+        mainInput.value = "";
+        clearResults();
+    });
+    resultSection.append(clearButton);
+}
+function clearResults() {
+    resultSection.innerHTML = "";
+    // Result Title Section
+    resultTitle.innerHTML = "Results";
+    resultSection.append(resultTitle);
 }
 convertButton.addEventListener("click", function () {
     mainInputValue = Number(mainInput.value);
@@ -86,8 +97,11 @@ resetButton.addEventListener("click", function () {
     isFahrenheit = false;
     isKelvin = false;
     changeContent(isCelsius, isFahrenheit, isKelvin);
+    clearResults();
 });
 changeButton.addEventListener("click", function () {
+    mainInput.value = "";
+    clearResults();
     if (isCelsius) {
         isCelsius = false;
         isFahrenheit = true;

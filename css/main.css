@@ -94,7 +94,26 @@ body {
   color: white;
 }
 
-.result-text {
+.result-section button {
+  font-size: 18px;
+  padding: 0.9rem;
+  border: 0;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 300ms;
+  -webkit-transition: background-color 300ms;
+  -moz-transition: background-color 300ms;
+  -ms-transition: background-color 300ms;
+  -o-transition: background-color 300ms;
+}
+.result-section button:hover {
+  background-color: #cbcbcb;
+}
+.result-section .result-text {
   color: white;
   margin: 1rem 0;
 }
